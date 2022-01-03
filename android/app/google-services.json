@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "120240986296",
+    "project_id": "chat-app-getx-24df5",
+    "storage_bucket": "chat-app-getx-24df5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120240986296:android:44c95ca122b9be38833c4d",
+        "android_client_info": {
+          "package_name": "com.netscaledigital.getChat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120240986296-okpafbvakrcmkb3ehen19n2st7ajsq3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj8llulQvl0k07p4RpblTf-Rb6BzLXPqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120240986296-okpafbvakrcmkb3ehen19n2st7ajsq3m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "120240986296-s88qgvq3j68tnqlku4bb7gjl2v65o1lf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.netscaledigital.getChat"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
