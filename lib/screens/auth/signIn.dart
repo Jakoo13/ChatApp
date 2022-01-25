@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'auth_controller.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -33,13 +37,13 @@ class _SignInState extends State<SignIn> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 200.0),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 200.0),
                       child: Text(
                         'Chat App',
                         style: TextStyle(
                           fontSize: 30,
-                          color: Colors.white54,
+                          color: Colors.grey[200],
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -71,14 +75,14 @@ class _SignInState extends State<SignIn> {
                           fillColor: Colors.blueGrey[400],
                           filled: true,
                           labelStyle: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.white70,
                           ),
                           errorStyle: const TextStyle(
                             color: Colors.black,
                           ),
                         ),
                         style: const TextStyle(
-                          color: Colors.black54,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -91,6 +95,7 @@ class _SignInState extends State<SignIn> {
                       child: TextFormField(
                         controller: passwordController,
                         cursorColor: Colors.white,
+                        obscureText: true,
                         decoration: InputDecoration(
                           focusedBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(
@@ -107,14 +112,14 @@ class _SignInState extends State<SignIn> {
                           fillColor: Colors.blueGrey[400],
                           filled: true,
                           labelStyle: const TextStyle(
-                            color: Colors.white,
+                            color: Colors.white70,
                           ),
                           errorStyle: const TextStyle(
                             color: Colors.black,
                           ),
                         ),
                         style: const TextStyle(
-                          color: Colors.black54,
+                          color: Colors.white70,
                         ),
                       ),
                     ),
@@ -123,9 +128,21 @@ class _SignInState extends State<SignIn> {
                         top: 20,
                       ),
                       child: ElevatedButton(
-                        onPressed: () {
-                          // ignore: avoid_print
-                          print('registered');
+                        onPressed: () async {
+                          http.Response response = await AuthController.login(
+                              emailController.text, passwordController.text);
+
+                          Map responseMap = jsonDecode(response.body);
+                          if (response.statusCode == 200) {
+                            Get.offAllNamed("/home");
+                          } else {
+                            Get.snackbar(
+                              "Register Error",
+                              responseMap.values.first[0],
+                              icon: const Icon(Icons.error),
+                              duration: const Duration(seconds: 2),
+                            );
+                          }
                         },
                         child: const Text("Sign In"),
                         style: ElevatedButton.styleFrom(

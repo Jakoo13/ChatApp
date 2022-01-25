@@ -1,16 +1,15 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'auth_controller.dart';
+import 'package:http/http.dart' as http;
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUp extends GetView<AuthController> {
+  SignUp({Key? key}) : super(key: key);
 
-  @override
-  _SignUpState createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final firstNameController = TextEditingController();
@@ -72,14 +71,14 @@ class _SignUpState extends State<SignUp> {
                       fillColor: Colors.blueGrey[400],
                       filled: true,
                       labelStyle: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                       errorStyle: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -108,14 +107,14 @@ class _SignUpState extends State<SignUp> {
                       fillColor: Colors.blueGrey[400],
                       filled: true,
                       labelStyle: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                       errorStyle: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -144,14 +143,14 @@ class _SignUpState extends State<SignUp> {
                       fillColor: Colors.blueGrey[400],
                       filled: true,
                       labelStyle: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                       errorStyle: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -180,14 +179,14 @@ class _SignUpState extends State<SignUp> {
                       fillColor: Colors.blueGrey[400],
                       filled: true,
                       labelStyle: const TextStyle(
-                        color: Colors.white,
+                        color: Colors.white70,
                       ),
                       errorStyle: const TextStyle(
                         color: Colors.black,
                       ),
                     ),
                     style: const TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white70,
                     ),
                   ),
                 ),
@@ -196,8 +195,24 @@ class _SignUpState extends State<SignUp> {
                     top: 20,
                   ),
                   child: ElevatedButton(
-                    onPressed: () {
-                      print('registered');
+                    onPressed: () async {
+                      http.Response response = await AuthController.register(
+                          firstNameController.text,
+                          lastNameController.text,
+                          emailController.text,
+                          passwordController.text);
+
+                      Map responseMap = jsonDecode(response.body);
+                      if (response.statusCode == 200) {
+                        Get.offAllNamed("/home");
+                      } else {
+                        Get.snackbar(
+                          "Register Error",
+                          responseMap.values.first[0],
+                          icon: const Icon(Icons.error),
+                          duration: const Duration(seconds: 2),
+                        );
+                      }
                     },
                     child: const Text("Sign Up"),
                     style: ElevatedButton.styleFrom(

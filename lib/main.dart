@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/signIn.dart';
-import 'package:get_chat/screens/signUp.dart';
+import 'package:get_chat/screens/auth/signIn.dart';
+import 'package:get_chat/screens/auth/signUp.dart';
+import 'package:get_chat/screens/home/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,10 +22,17 @@ class MyApp extends StatelessWidget {
       ),
       home: const SignIn(),
       getPages: [
-        GetPage(name: "/", page: () => const SignIn()),
+        GetPage(
+          name: "/",
+          page: () => const SignIn(),
+        ),
         GetPage(
           name: "/signUp",
-          page: () => const SignUp(),
+          page: () => SignUp(),
+        ),
+        GetPage(
+          name: "/home",
+          page: () => const HomeScreen(),
         ),
       ],
     );
