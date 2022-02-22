@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+
 import 'auth_controller.dart';
 
 class SignIn extends StatefulWidget {
@@ -123,36 +121,37 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          http.Response response = await AuthController.login(
-                              emailController.text, passwordController.text);
-
-                          Map responseMap = jsonDecode(response.body);
-                          if (response.statusCode == 200) {
-                            Get.offAllNamed("/home");
-                          } else {
-                            Get.snackbar(
-                              "Register Error",
-                              responseMap.values.first[0],
-                              icon: const Icon(Icons.error),
-                              duration: const Duration(seconds: 2),
-                            );
-                          }
-                        },
-                        child: const Text("Sign In"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blueGrey[600],
+                    // SIGN IN BUTTON
+                    InkWell(
+                      onTap: () {
+                        AuthController.authInstance.login(
+                            emailController.text.trim(),
+                            passwordController.text.trim());
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 30),
+                        height: 50,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          color: Colors.blueGrey[600],
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            "Sign In",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        top: 20,
+                        top: 25,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -160,15 +159,16 @@ class _SignInState extends State<SignIn> {
                           const Text(
                             "Don't have an account? ",
                             style: TextStyle(
-                              fontSize: 11,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
+                              color: Colors.white,
                             ),
                           ),
                           InkWell(
                             child: const Text(
                               'Sign Up',
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white70,
                               ),

@@ -1,44 +1,62 @@
-import 'dart:convert';
+// ignore_for_file: avoid_print
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_chat/screens/auth/signIn.dart';
+import 'package:get_chat/screens/home/home_screen.dart';
 
 class AuthController extends GetxController {
-  static const String baseURL = "http://127.0.0.1:8000/api/";
-  static const Map<String, String> headers = {
-    "Content-Type": "application/json"
-  };
+  static AuthController authInstance = Get.find();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late Rx<User?> _firebaseUser;
 
-  static Future<http.Response> register(
-      String firstName, String lastName, String email, String password) async {
-    Map data = {
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
-      "password": password
-    };
-    var body = json.encode(data);
-    var url = Uri.parse(baseURL + "auth/register");
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-    // ignore: avoid_print
-    print(response.body);
-    return response;
+  @override
+  void onReady() {
+    super.onReady();
+    _firebaseUser = Rx<User?>(_auth.currentUser);
+    _firebaseUser.bindStream(_auth.userChanges());
+
+    ever(_firebaseUser, _setInitialScreen);
   }
 
-  static Future<http.Response> login(String email, String password) async {
-    Map data = {"email": email, "password": password};
-    var body = json.encode(data);
-    var url = Uri.parse(baseURL + "auth/login");
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: body,
-    );
-    // ignore: avoid_print
-    print(response.body);
-    return response;
+  _setInitialScreen(User? user) {
+    if (user != null) {
+      //User is logged in
+      Get.offAll(() => const HomeScreen());
+    } else {
+      //user is null as in user not available or logged in
+      Get.offAll(() => const SignIn());
+    }
+  }
+
+  void register(String email, String password) {
+    try {
+      _auth.createUserWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      // this is solely for Firebase Auth exception like "password did not match"
+      print(e.message);
+    } catch (e) {
+      // This is temp. This is where we need to handle different dialog to indicate what's wrong
+      print(e);
+    }
+  }
+
+  void login(String email, String password) {
+    try {
+      _auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      // this is solely for Firebase Auth exception like "password did not match"
+      print(e.message);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void signOut() {
+    try {
+      _auth.signOut();
+    } catch (e) {
+      print(e);
+    }
   }
 }

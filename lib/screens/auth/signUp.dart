@@ -1,13 +1,10 @@
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'auth_controller.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_chat/screens/auth/auth_controller.dart';
 
-class SignUp extends GetView<AuthController> {
+class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);
 
   final emailController = TextEditingController();
@@ -40,7 +37,7 @@ class SignUp extends GetView<AuthController> {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white54,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -103,7 +100,9 @@ class SignUp extends GetView<AuthController> {
                         ),
                       ),
                       labelText: "Last Name",
-                      hintStyle: const TextStyle(color: Colors.white54),
+                      hintStyle: const TextStyle(
+                        color: Colors.white54,
+                      ),
                       fillColor: Colors.blueGrey[400],
                       filled: true,
                       labelStyle: const TextStyle(
@@ -190,39 +189,37 @@ class SignUp extends GetView<AuthController> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 20,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      http.Response response = await AuthController.register(
-                          firstNameController.text,
-                          lastNameController.text,
-                          emailController.text,
-                          passwordController.text);
-
-                      Map responseMap = jsonDecode(response.body);
-                      if (response.statusCode == 200) {
-                        Get.offAllNamed("/home");
-                      } else {
-                        Get.snackbar(
-                          "Register Error",
-                          responseMap.values.first[0],
-                          icon: const Icon(Icons.error),
-                          duration: const Duration(seconds: 2),
-                        );
-                      }
-                    },
-                    child: const Text("Sign Up"),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blueGrey[600],
+                // REGISTER BUTTON
+                InkWell(
+                  onTap: () {
+                    AuthController.authInstance.register(
+                        emailController.text.trim(),
+                        passwordController.text.trim());
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 25),
+                    height: 50,
+                    width: 110,
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey[600],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 20,
+                    top: 22,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -230,15 +227,16 @@ class SignUp extends GetView<AuthController> {
                       const Text(
                         "Already have an account? ",
                         style: TextStyle(
-                          fontSize: 11,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                       InkWell(
                         child: const Text(
                           'Sign In',
                           style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: Colors.white70,
                           ),
