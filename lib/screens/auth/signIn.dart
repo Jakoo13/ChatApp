@@ -64,7 +64,7 @@ class _SignInState extends State<SignIn> {
                             Radius.circular(10),
                           ),
                         ),
-                        labelText: "Username",
+                        labelText: "Email",
                         hintStyle: const TextStyle(
                           color: Colors.white54,
                         ),
