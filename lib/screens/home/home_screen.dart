@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/auth_controller.dart';
+import 'package:get_chat/screens/auth/userController.dart';
 import 'package:get_chat/screens/chat/main_chat.dart';
 import 'package:get_chat/screens/settings/settings.dart';
 
@@ -9,8 +9,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userController = Get.put(UserController());
+
     return Scaffold(
       body: Container(
+        width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
@@ -21,60 +24,70 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              //TITLE
-              const Padding(
-                padding: EdgeInsets.only(top: 130.0),
+        child: Column(
+          children: [
+            //TITLE
+            const Padding(
+              padding: EdgeInsets.only(top: 100.0),
+              child: Text(
+                "Get Chat",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 50,
+                ),
+              ),
+            ),
+            //Greeting
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, top: 30.0),
                 child: Text(
-                  'GetX Chat',
-                  style: TextStyle(
+                  "Hello ${userController.user.firstName!},",
+                  style: const TextStyle(
                     color: Colors.white70,
-                    fontSize: 50,
+                    fontSize: 35,
                   ),
                 ),
               ),
-              // CHAT SCREEN BUTTON
-              InkWell(
-                onTap: () {
-                  Get.to(const MainChat());
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(top: 200),
-                  height: 80,
-                  width: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.blueGrey[600],
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Text(
-                          "Go Chat",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 25,
-                          ),
-                          textAlign: TextAlign.center,
+            ),
+            // CHAT SCREEN BUTTON
+            InkWell(
+              onTap: () {
+                Get.to(() => const MainChat());
+              },
+              child: Container(
+                margin: const EdgeInsets.only(top: 200),
+                height: 80,
+                width: 200,
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey[600],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Text(
+                        "Go Chat",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 25,
                         ),
-                        Icon(
-                          Icons.people,
-                          color: Colors.white70,
-                          size: 32,
-                        ),
-                      ],
-                    ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Icon(
+                        Icons.people,
+                        color: Colors.white70,
+                        size: 32,
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: SizedBox(

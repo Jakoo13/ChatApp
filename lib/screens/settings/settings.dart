@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
-import 'package:get_chat/screens/home/home_screen.dart';
 
 import '../auth/auth_controller.dart';
 

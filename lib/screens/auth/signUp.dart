@@ -193,6 +193,8 @@ class SignUp extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     AuthController.authInstance.register(
+                        firstNameController.text.trim(),
+                        lastNameController.text.trim(),
                         emailController.text.trim(),
                         passwordController.text.trim());
                   },
