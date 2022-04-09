@@ -2,12 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_chat/screens/chat/chatController.dart';
 
-class MainChat extends StatelessWidget {
+class MainChat extends GetView<ChatController> {
   const MainChat({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var chatController = Get.put(ChatController());
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -36,7 +38,7 @@ class MainChat extends StatelessWidget {
                     padding: EdgeInsets.only(
                       left: 20,
                       right: 100,
-                      top: 5,
+                      top: 60,
                     ),
                     child: Icon(
                       Icons.arrow_back_ios_new,
@@ -49,7 +51,6 @@ class MainChat extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(
                     top: 60.0,
-                    bottom: 50,
                   ),
                   child: Text(
                     "Main Chat",
@@ -60,6 +61,44 @@ class MainChat extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * .7,
+              height: MediaQuery.of(context).size.height * .8,
+              child: Obx(
+                () => ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: controller.users.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        height: 100,
+                        margin: const EdgeInsets.only(
+                          bottom: 10,
+                        ),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.white,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              controller.users[index].firstName,
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  color: Colors.blueGrey,
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.grey,
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ),
             ),
           ],
         ),

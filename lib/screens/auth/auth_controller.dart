@@ -39,15 +39,8 @@ class AuthController extends GetxController {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      User? user = result.user;
-      UserModel _userModel = UserModel(
-          uid: result.user!.uid,
-          email: email,
-          firstName: firstName,
-          lastName: lastName);
-      userController.user = _userModel;
-      print(_userModel);
-      await UserCollectionSetup(uid: user!.uid)
+
+      await UserCollectionSetup(uid: result.user!.uid)
           .updateUserData(firstName, lastName, email);
       //return _getUserModelFromFirebase(user);
     } on FirebaseAuthException catch (e) {
@@ -61,24 +54,7 @@ class AuthController extends GetxController {
 
   void login(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-
-      //Set User Model within userController.dart
-      var thisUser = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(result.user!.uid)
-          .get();
-      Map<String, dynamic> data = thisUser.data()!;
-      var firstName = data['firstName'];
-      var lastName = data['lastName'];
-      UserModel _userModel = UserModel(
-        uid: result.user!.uid,
-        email: email,
-        firstName: firstName,
-        lastName: lastName,
-      );
-      userController.user = _userModel;
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       // this is solely for Firebase Auth exception like "password did not match"
       print(e.message);

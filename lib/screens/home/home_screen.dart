@@ -42,11 +42,13 @@ class HomeScreen extends StatelessWidget {
               alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.only(left: 20, top: 30.0),
-                child: Text(
-                  "Hello ${userController.user.firstName!},",
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 35,
+                child: Obx(
+                  () => Text(
+                    "Hello ${userController.user.firstName},",
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 35,
+                    ),
                   ),
                 ),
               ),
