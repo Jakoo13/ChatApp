@@ -1,16 +1,13 @@
 // ignore_for_file: avoid_print
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/UserModel.dart';
 import 'package:get_chat/screens/auth/signIn.dart';
-import 'package:get_chat/screens/auth/userController.dart';
 import 'package:get_chat/screens/home/home_screen.dart';
 import 'UserCollectionSetup.dart';
 
 class AuthController extends GetxController {
-  var userController = Get.put(UserController());
+  // var userController = Get.put(UserController());
   static AuthController authInstance = Get.find();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late Rx<User?> _firebaseUser;

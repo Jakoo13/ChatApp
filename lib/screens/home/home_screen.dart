@@ -1,7 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_chat/screens/auth/userController.dart';
-import 'package:get_chat/screens/chat/main_chat.dart';
+import 'package:get_chat/screens/chat/all_users.dart';
 import 'package:get_chat/screens/settings/settings.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,6 +39,19 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+            InkWell(
+              onTap: () {
+                print(userController.user.firstName);
+              },
+              child: Container(
+                width: 100,
+                height: 50,
+                color: Colors.blue,
+                child: const Center(
+                  child: Text('Press Me'),
+                ),
+              ),
+            ),
             //Greeting
             Align(
               alignment: Alignment.topLeft,
@@ -56,7 +71,7 @@ class HomeScreen extends StatelessWidget {
             // CHAT SCREEN BUTTON
             InkWell(
               onTap: () {
-                Get.to(() => const MainChat());
+                Get.to(() => const AllUsers());
               },
               child: Container(
                 margin: const EdgeInsets.only(top: 200),
