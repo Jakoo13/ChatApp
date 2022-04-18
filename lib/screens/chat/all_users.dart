@@ -73,11 +73,15 @@ class AllUsers extends GetView<ChatController> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
+                          controller.getAllMessages(controller.currentUserEmail,
+                              controller.users[index].email);
                           Get.to(
                             () => ChatScreen(
-                                index,
-                                controller.users[index].firstName,
-                                controller.users[index].lastName),
+                              index,
+                              controller.users[index].firstName,
+                              controller.users[index].lastName,
+                              controller.users[index].email,
+                            ),
                           );
                         },
                         child: Container(

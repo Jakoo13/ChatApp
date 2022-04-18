@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       body: Container(
+        height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -39,19 +40,19 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                print(userController.user.firstName);
-              },
-              child: Container(
-                width: 100,
-                height: 50,
-                color: Colors.blue,
-                child: const Center(
-                  child: Text('Press Me'),
-                ),
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     print(userController.user.firstName);
+            //   },
+            //   child: Container(
+            //     width: 100,
+            //     height: 50,
+            //     color: Colors.blue,
+            //     child: const Center(
+            //       child: Text('Press Me'),
+            //     ),
+            //   ),
+            // ),
             //Greeting
             Align(
               alignment: Alignment.topLeft,
@@ -59,7 +60,7 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 20, top: 30.0),
                 child: Obx(
                   () => Text(
-                    "Hello ${userController.user.firstName},",
+                    "Hello ${userController.user.firstName ?? 'User'},",
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 35,

@@ -1,20 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_chat/screens/chat/chat_bubble.dart';
 
 import 'chatController.dart';
 
 class ChatScreen extends GetView<ChatController> {
   final int index;
-  final String firstName;
-  final String lastName;
-  const ChatScreen(this.index, this.firstName, this.lastName, {Key? key})
+  final String sendToFirstName;
+  final String sendToLastName;
+  final String sendToEmail;
+  const ChatScreen(
+      this.index, this.sendToFirstName, this.sendToLastName, this.sendToEmail,
+      {Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      appBar: AppBar(title: Text('$firstName $lastName')),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color.fromARGB(255, 48, 207, 208),
+              Color.fromARGB(255, 51, 8, 103),
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 70,
+                left: 20,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: Get.back,
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 32,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "$sendToFirstName $sendToLastName",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 27,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 50,
+                  )
+                ],
+              ),
+            ),
+            Flexible(
+              child: Container(),
+            ),
+            ChatBubble(sendToEmail),
+          ],
+        ),
+      ),
     );
   }
 }

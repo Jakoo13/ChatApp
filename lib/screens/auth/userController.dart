@@ -22,6 +22,7 @@ class UserController extends GetxController {
 
   void setCurrentUser() async {
     final firebaseUser = auth.currentUser;
+
     //Set User Model within userController.dart
     var thisUser =
         await fireStore.collection('users').doc(firebaseUser!.uid).get();
