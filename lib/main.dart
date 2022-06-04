@@ -1,4 +1,7 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_chat/screens/auth/auth_controller.dart';
@@ -14,6 +17,25 @@ void main() async {
   ).then((value) {
     Get.put(AuthController());
   });
+
+  //First Step in Push Notification Capabilities
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings iosSettings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true);
+  if (iosSettings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission');
+  } else if (iosSettings.authorizationStatus ==
+      AuthorizationStatus.provisional) {
+    print('User granted provisional permission');
+  } else {
+    print('User declined or has not accepted permission');
+  }
 
   runApp(const MyApp());
 }

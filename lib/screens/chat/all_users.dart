@@ -71,47 +71,58 @@ class AllUsers extends GetView<ChatController> {
                     shrinkWrap: true,
                     itemCount: controller.users.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          controller.getAllMessages(controller.currentUserEmail,
-                              controller.users[index].email);
-                          Get.to(
-                            () => ChatScreen(
-                              index,
-                              controller.users[index].firstName,
-                              controller.users[index].lastName,
-                              controller.users[index].email,
-                            ),
-                          );
-                        },
-                        child: Container(
-                          height: 100,
-                          margin: const EdgeInsets.only(
-                            bottom: 10,
-                          ),
-                          decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Colors.white,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                "${controller.users[index].firstName} ${controller.users[index].lastName}",
-                                textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 19,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              const Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.grey,
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                      return
+                          //Dont Show Current User
+                          controller.users[index].email ==
+                                  controller.currentUserEmail
+                              ? const SizedBox.shrink()
+                              : InkWell(
+                                  onTap: () {
+                                    // controller.getAllMessages(controller.currentUserEmail,
+                                    //     controller.users[index].email);
+                                    controller.messageList.bindStream(
+                                        controller.messageStream(
+                                            controller.currentUserEmail,
+                                            controller.users[index].email));
+                                    Get.to(
+                                      () => ChatScreen(
+                                        index,
+                                        controller.users[index].firstName,
+                                        controller.users[index].lastName,
+                                        controller.users[index].email,
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 100,
+                                    margin: const EdgeInsets.only(
+                                      bottom: 10,
+                                    ),
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+                                      color: Colors.white,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          "${controller.users[index].firstName} ${controller.users[index].lastName}",
+                                          textAlign: TextAlign.left,
+                                          style: const TextStyle(
+                                              color: Colors.blueGrey,
+                                              fontSize: 19,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        const Icon(
+                                          Icons.arrow_forward_ios,
+                                          color: Colors.grey,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
                     }),
               ),
             ),

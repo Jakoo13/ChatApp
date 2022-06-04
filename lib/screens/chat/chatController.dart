@@ -16,6 +16,8 @@ class ChatController extends GetxController with StateMixin {
   //Get Current UserModel
   var currentUserEmail = FirebaseAuth.instance.currentUser!.email;
 
+  var sendMessageTo = ''.obs;
+
   @override
   void onInit() async {
     users.bindStream(lista());
@@ -24,27 +26,30 @@ class ChatController extends GetxController with StateMixin {
 
   @override
   void onReady() {
-    messageList.bindStream(messageStream());
+    // messageList.bindStream(messageStream());
   }
 
 //////Get All Messages For Particular Chat ///////////////
   Rx<List<MessageModel>> messageList = Rx<List<MessageModel>>([]);
   List<MessageModel> get messages => messageList.value;
 
-  static Stream<List<MessageModel>> messageStream() {
+  Stream<List<MessageModel>> messageStream(currUser, sentTo) {
+    print("The Current User Email: $currUser");
     return FirebaseFirestore.instance
         .collection('messages')
-        .doc('${sortAlphabetically()}')
+        .doc(sortAlphabetically(currUser, sentTo))
         .collection('chats')
         .orderBy('timeStamp', descending: false)
         .snapshots()
         .map((QuerySnapshot query) {
+      print("Query Docs: ${query.docs}");
       List<MessageModel> messages = [];
       for (var message in query.docs) {
         final messageModel =
             MessageModel.fromDocumentSnapshot(documentSnapshot: message);
         messages.add(messageModel);
       }
+      print("Messages: $messages");
       return messages;
     });
   }
@@ -60,7 +65,7 @@ class ChatController extends GetxController with StateMixin {
       'from': sentFrom,
       'to': sentTo,
       'timeStamp': Timestamp.now(),
-      'read': "false"
+      'read': false
     });
   }
 
@@ -68,7 +73,7 @@ class ChatController extends GetxController with StateMixin {
     final sortedSet = SplayTreeSet.from(
       {"$sf", "$st"},
     );
-    print(sortedSet.join());
+    print("From SortAlpahbetically Function: ${sortedSet.join()}");
     return sortedSet.join();
   }
 

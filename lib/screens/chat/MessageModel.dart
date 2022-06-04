@@ -18,9 +18,9 @@ class MessageModel {
   MessageModel.fromDocumentSnapshot(
       {required DocumentSnapshot documentSnapshot}) {
     content = documentSnapshot["content"];
-    messageTo = documentSnapshot["messageTo"];
-    messageFrom = documentSnapshot["messageFrom"];
+    messageTo = documentSnapshot["to"];
+    messageFrom = documentSnapshot["from"];
     read = documentSnapshot["read"];
-    timeStamp = documentSnapshot["timeStamp"];
+    timeStamp = documentSnapshot["timeStamp"].toDate();
   }
 }

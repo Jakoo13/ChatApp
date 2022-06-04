@@ -1,67 +1,63 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/chat/chatController.dart';
+
+import '../auth/userController.dart';
 
 class ChatBubble extends StatelessWidget {
-  final String sentToEmail;
-  const ChatBubble(this.sentToEmail, {Key? key}) : super(key: key);
+  const ChatBubble({
+    Key? key,
+    required this.messageText,
+    required this.sendToEmail,
+  }) : super(key: key);
+
+  final String? messageText;
+  final String? sendToEmail;
 
   @override
   Widget build(BuildContext context) {
-    var chatController = Get.find<ChatController>();
-    return Align(
-      alignment: FractionalOffset.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-        child: Row(
+    final userController = Get.find<UserController>();
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: userController.user.email == sendToEmail
+              ? MainAxisAlignment.start
+              : MainAxisAlignment.end,
           children: [
-            Expanded(
-              child: TextFormField(
-                controller: chatController.messageController,
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                decoration: InputDecoration(
-                  helperMaxLines: 3,
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                    borderSide: const BorderSide(
-                      color: Colors.grey,
-                      width: 2.0,
-                    ),
-                  ),
-                  hintText: 'Send Message',
-                  hintStyle: const TextStyle(
-                    color: Colors.grey,
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                  ),
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      chatController.sendMessage(
-                          chatController.currentUserEmail, sentToEmail);
-                    },
-                    child: const Icon(Icons.send, color: Colors.grey),
+            Container(
+              margin: const EdgeInsets.only(
+                bottom: 10,
+                left: 10,
+                right: 10,
+              ),
+              padding: const EdgeInsets.all(12),
+              constraints: const BoxConstraints(maxWidth: 240),
+              decoration: BoxDecoration(
+                color: userController.user.email == sendToEmail
+                    ? Colors.green
+                    : Colors.blue,
+                borderRadius: userController.user.email == sendToEmail
+                    ? const BorderRadius.only(
+                        bottomRight: Radius.circular(15),
+                      )
+                    : const BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                      ),
+              ),
+              child: Center(
+                child: Text(
+                  messageText!,
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
                   ),
                 ),
               ),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }

@@ -40,19 +40,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // InkWell(
-            //   onTap: () {
-            //     print(userController.user.firstName);
-            //   },
-            //   child: Container(
-            //     width: 100,
-            //     height: 50,
-            //     color: Colors.blue,
-            //     child: const Center(
-            //       child: Text('Press Me'),
-            //     ),
-            //   ),
-            // ),
+
             //Greeting
             Align(
               alignment: Alignment.topLeft,

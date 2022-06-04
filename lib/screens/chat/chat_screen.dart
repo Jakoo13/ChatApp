@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_chat/screens/chat/chat_input.dart';
 import 'package:get_chat/screens/chat/chat_bubble.dart';
 
 import 'chatController.dart';
@@ -31,6 +32,7 @@ class ChatScreen extends GetView<ChatController> {
         ),
         child: Column(
           children: [
+            //Header With Name and Back Button
             Padding(
               padding: const EdgeInsets.only(
                 top: 70,
@@ -64,10 +66,23 @@ class ChatScreen extends GetView<ChatController> {
                 ],
               ),
             ),
-            Flexible(
-              child: Container(),
+            //END HEADER
+            Expanded(
+              child: Obx(
+                () => ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: controller.messageList.value.length,
+                  itemBuilder: (context, index) {
+                    return ChatBubble(
+                      messageText: controller.messageList.value[index].content,
+                      sendToEmail:
+                          controller.messageList.value[index].messageTo,
+                    );
+                  },
+                ),
+              ),
             ),
-            ChatBubble(sendToEmail),
+            ChatInput(sendToEmail),
           ],
         ),
       ),

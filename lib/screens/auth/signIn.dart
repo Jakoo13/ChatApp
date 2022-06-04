@@ -71,7 +71,8 @@ class _SignInState extends State<SignIn> {
                         fillColor: Colors.blueGrey[400],
                         filled: true,
                         labelStyle: const TextStyle(
-                          color: Colors.white70,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
                         ),
                         errorStyle: const TextStyle(
                           color: Colors.black,
@@ -108,7 +109,7 @@ class _SignInState extends State<SignIn> {
                         fillColor: Colors.blueGrey[400],
                         filled: true,
                         labelStyle: const TextStyle(
-                          color: Colors.white70,
+                          color: Colors.white,
                         ),
                         errorStyle: const TextStyle(
                           color: Colors.black,
