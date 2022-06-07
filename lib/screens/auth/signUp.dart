@@ -15,6 +15,7 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 70),
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topRight,
@@ -25,235 +26,228 @@ class SignUp extends StatelessWidget {
             ],
           ),
         ),
-        child: Center(
-          child: Form(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 30),
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
+        child: Form(
+          child: ListView(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                  bottom: 30,
+                  top: 80,
+                ),
+                child: Text(
+                  "Register",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 70,
-                    right: 70,
-                    top: 0,
-                  ),
-                  child: TextFormField(
-                    controller: firstNameController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      labelText: "First Name",
-                      hintStyle: const TextStyle(
-                        color: Colors.white54,
-                      ),
-                      fillColor: Colors.blueGrey[400],
-                      filled: true,
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-                      errorStyle: const TextStyle(
-                        color: Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 0,
+                ),
+                child: TextFormField(
+                  controller: firstNameController,
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
-                    style: const TextStyle(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    labelText: "First Name",
+                    hintStyle: const TextStyle(
+                      color: Colors.white54,
+                    ),
+                    fillColor: Colors.blueGrey[400],
+                    filled: true,
+                    labelStyle: const TextStyle(
                       color: Colors.white70,
                     ),
+                    errorStyle: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white70,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 70,
-                    right: 70,
-                    top: 25,
-                  ),
-                  child: TextFormField(
-                    controller: lastNameController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      labelText: "Last Name",
-                      hintStyle: const TextStyle(
-                        color: Colors.white54,
-                      ),
-                      fillColor: Colors.blueGrey[400],
-                      filled: true,
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-                      errorStyle: const TextStyle(
-                        color: Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 25,
+                ),
+                child: TextFormField(
+                  controller: lastNameController,
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
-                    style: const TextStyle(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    labelText: "Last Name",
+                    hintStyle: const TextStyle(
+                      color: Colors.white54,
+                    ),
+                    fillColor: Colors.blueGrey[400],
+                    filled: true,
+                    labelStyle: const TextStyle(
                       color: Colors.white70,
                     ),
+                    errorStyle: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white70,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 70,
-                    right: 70,
-                    top: 25,
-                  ),
-                  child: TextFormField(
-                    controller: emailController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      labelText: "Email",
-                      hintStyle: const TextStyle(color: Colors.white54),
-                      fillColor: Colors.blueGrey[400],
-                      filled: true,
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-                      errorStyle: const TextStyle(
-                        color: Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 25,
+                ),
+                child: TextFormField(
+                  controller: emailController,
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
-                    style: const TextStyle(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    labelText: "Email",
+                    hintStyle: const TextStyle(color: Colors.white54),
+                    fillColor: Colors.blueGrey[400],
+                    filled: true,
+                    labelStyle: const TextStyle(
                       color: Colors.white70,
                     ),
+                    errorStyle: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white70,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 70,
-                    right: 70,
-                    top: 25,
-                  ),
-                  child: TextFormField(
-                    controller: passwordController,
-                    cursorColor: Colors.white,
-                    decoration: InputDecoration(
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      labelText: "Password",
-                      hintStyle: const TextStyle(color: Colors.white54),
-                      fillColor: Colors.blueGrey[400],
-                      filled: true,
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-                      errorStyle: const TextStyle(
-                        color: Colors.black,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 25,
+                ),
+                child: TextFormField(
+                  controller: passwordController,
+                  cursorColor: Colors.white,
+                  decoration: InputDecoration(
+                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
                     ),
-                    style: const TextStyle(
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    labelText: "Password",
+                    hintStyle: const TextStyle(color: Colors.white54),
+                    fillColor: Colors.blueGrey[400],
+                    filled: true,
+                    labelStyle: const TextStyle(
                       color: Colors.white70,
                     ),
+                    errorStyle: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  style: const TextStyle(
+                    color: Colors.white70,
                   ),
                 ),
-                // REGISTER BUTTON
-                InkWell(
-                  onTap: () {
-                    AuthController.authInstance.register(
-                        firstNameController.text.trim(),
-                        lastNameController.text.trim(),
-                        emailController.text.trim(),
-                        passwordController.text.trim());
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 25),
-                    height: 50,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      color: Colors.blueGrey[600],
-                      borderRadius: BorderRadius.circular(10),
+              ),
+              // REGISTER BUTTON
+              InkWell(
+                onTap: () {
+                  AuthController.authInstance.register(
+                      firstNameController.text.trim(),
+                      lastNameController.text.trim(),
+                      emailController.text.trim(),
+                      passwordController.text.trim());
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(top: 25),
+                  height: 50,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[600],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    child: const Center(
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                        textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 22,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Already have an account? ",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 22,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        "Already have an account? ",
+                    InkWell(
+                      child: const Text(
+                        'Sign In',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.white70,
                         ),
                       ),
-                      InkWell(
-                        child: const Text(
-                          'Sign In',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        onTap: () {
-                          Get.toNamed(
-                            "/signIn",
-                          );
-                        },
-                      )
-                    ],
-                  ),
+                      onTap: () {
+                        Get.toNamed(
+                          "/signIn",
+                        );
+                      },
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

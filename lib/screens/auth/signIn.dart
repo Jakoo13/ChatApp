@@ -18,6 +18,9 @@ class _SignInState extends State<SignIn> {
     return MaterialApp(
       home: Scaffold(
         body: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 70,
+          ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -30,13 +33,14 @@ class _SignInState extends State<SignIn> {
           ),
           child: Center(
             child: Form(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              child: ListView(
+                // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 200.0),
                     child: Text(
                       'Chat App',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
                         color: Colors.grey[200],
@@ -46,8 +50,6 @@ class _SignInState extends State<SignIn> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 70,
-                      right: 70,
                       top: 80,
                     ),
                     child: TextFormField(
@@ -85,8 +87,6 @@ class _SignInState extends State<SignIn> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      left: 70,
-                      right: 70,
                       top: 40,
                     ),
                     child: TextFormField(

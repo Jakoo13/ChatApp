@@ -1,13 +1,104 @@
 // ignore_for_file: avoid_print
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_chat/screens/auth/userController.dart';
 import 'package:get_chat/screens/chat/all_users.dart';
-import 'package:get_chat/screens/settings/settings.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../../main.dart';
+
+Future<void> saveTokenToDatabase(String token) async {
+  // Assume user is logged in for this example
+  String userId = FirebaseAuth.instance.currentUser!.uid;
+  //String? userEmail = FirebaseAuth.instance.currentUser!.email;
+
+  await FirebaseFirestore.instance.collection('users').doc(userId).update({
+    'tokens': token.toString()
+    // FieldValue.arrayUnion([token]),
+  });
+}
+
+Future<void> getFirebaseToken() async {
+  // Get the token each time the application loads
+  String? token = await FirebaseMessaging.instance.getToken();
+  // Save the initial token to the database
+
+  await saveTokenToDatabase(token!);
+}
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    getFirebaseToken();
+
+    //gives message on which user taps and opens app from terminated
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      print('opened app from terminated');
+      if (message != null) {
+        print('received message from terminated: $message');
+      }
+    });
+
+    // end different video
+
+    //When App is in Foreground, does not show popup, but gets message, does not run when app is in background
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      print('onMessage in foreground: $message');
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(channel.id, channel.name,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher'),
+          ),
+        );
+      }
+    });
+
+    //Fires when User CLICKS notification while app only is in background and not terminated
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      print('A new onMessageOpenedApp event was published!: $message');
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        print('on message opened app: $message');
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                title: Text(notification.title ?? '-1'),
+                content: SingleChildScrollView(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(notification.body ?? '-1'),
+                  ],
+                )),
+              );
+            });
+      }
+      //final routeFromMessage = message.data["route"];
+      //Navigator.pushNamed(context, routeFromMessage);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

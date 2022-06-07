@@ -9,6 +9,23 @@ import 'package:get_chat/screens/auth/signIn.dart';
 import 'package:get_chat/screens/auth/signUp.dart';
 import 'package:get_chat/screens/home/home_screen.dart';
 import 'firebase_options.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'com.netscaledigital.getChat.urgent', 'High Importance Notifications',
+    importance: Importance.high, playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+//fires when receive notification in background, does not show popup, This Handler must be top level because this works outside of the app when app is in background
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print("Handling a background message: ${message.messageId}");
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +37,7 @@ void main() async {
 
   //First Step in Push Notification Capabilities
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings iosSettings = await messaging.requestPermission(
+  NotificationSettings settings = await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -28,14 +45,23 @@ void main() async {
       criticalAlert: false,
       provisional: false,
       sound: true);
-  if (iosSettings.authorizationStatus == AuthorizationStatus.authorized) {
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     print('User granted permission');
-  } else if (iosSettings.authorizationStatus ==
-      AuthorizationStatus.provisional) {
+  } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
     print('User granted provisional permission');
   } else {
     print('User declined or has not accepted permission');
   }
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
 
   runApp(const MyApp());
 }

@@ -15,7 +15,7 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
+    final userController = Get.put(UserController());
 
     return Column(
       children: [
