@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-import '../auth/auth_controller.dart';
+import 'auth/auth_controller.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);

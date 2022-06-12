@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get_chat/screens/auth/UserModel.dart';
+import 'package:get_chat/auth/UserModel.dart';
 
 class Database {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/UserModel.dart';
+import 'package:get_chat/auth/UserModel.dart';
 
 class UserController extends GetxController {
   var fireStore = FirebaseFirestore.instance;

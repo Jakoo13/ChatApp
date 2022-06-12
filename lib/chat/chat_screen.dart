@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/chat/chat_input.dart';
-import 'package:get_chat/screens/chat/chat_bubble.dart';
+import 'package:get_chat/chat/chat_input.dart';
+import 'package:get_chat/chat/chat_bubble.dart';
 
 import 'chatController.dart';
 

@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/signIn.dart';
-import 'package:get_chat/screens/home/home_screen.dart';
+import 'package:get_chat/auth/signIn.dart';
+import 'package:get_chat/home/home_screen.dart';
 import 'UserCollectionSetup.dart';
 
 class AuthController extends GetxController {

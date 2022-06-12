@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/chat/chatController.dart';
+import 'package:get_chat/chat/chatController.dart';
 
 class ChatInput extends StatelessWidget {
   final String sentToEmail;

@@ -4,10 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/auth_controller.dart';
-import 'package:get_chat/screens/auth/signIn.dart';
-import 'package:get_chat/screens/auth/signUp.dart';
-import 'package:get_chat/screens/home/home_screen.dart';
+import 'package:get_chat/auth/auth_controller.dart';
+import 'package:get_chat/auth/signIn.dart';
+import 'package:get_chat/auth/signUp.dart';
+import 'package:get_chat/home/home_screen.dart';
 import 'firebase_options.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 

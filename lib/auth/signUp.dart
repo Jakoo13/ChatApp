@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/auth/auth_controller.dart';
+import 'package:get_chat/auth/auth_controller.dart';
 
 class SignUp extends StatelessWidget {
   SignUp({Key? key}) : super(key: key);

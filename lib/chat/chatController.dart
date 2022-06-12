@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/chat/MessageModel.dart';
+import 'package:get_chat/chat/MessageModel.dart';
 
 import '../auth/UserModel.dart';
 
@@ -60,13 +60,15 @@ class ChatController extends GetxController with StateMixin {
     await FirebaseFirestore.instance
         .collection('messages/${sortAlphabetically(sentFrom, sentTo)}/chats')
         .doc()
-        .set({
-      'content': messageController.text,
-      'from': sentFrom,
-      'to': sentTo,
-      'timeStamp': Timestamp.now(),
-      'read': false
-    });
+        .set(
+      {
+        'content': messageController.text,
+        'from': sentFrom,
+        'to': sentTo,
+        'timeStamp': Timestamp.now(),
+        'read': false
+      },
+    );
   }
 
   String sortAlphabetically(sf, st) {

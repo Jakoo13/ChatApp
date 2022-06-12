@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_chat/screens/chat/chatController.dart';
-import 'package:get_chat/screens/chat/chat_screen.dart';
+import 'package:get_chat/chat/chatController.dart';
+import 'package:get_chat/chat/chat_screen.dart';
 
 class AllUsers extends GetView<ChatController> {
   const AllUsers({Key? key}) : super(key: key);
