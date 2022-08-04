@@ -91,26 +91,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Column(
           children: [
-            //TITLE
-            const Padding(
-              padding: EdgeInsets.only(top: 100.0),
-              child: Text(
-                "Get Chat",
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 50,
-                ),
-              ),
+            //Logo
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Image.asset("getXChatLogo.png"),
             ),
 
             //Greeting
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.only(left: 20, top: 30.0),
+                padding: const EdgeInsets.only(left: 20),
                 child: Obx(
                   () => Text(
-                    "Hello ${userController.user.firstName ?? 'User'},",
+                    "Hello ${userController.user.firstName ?? 'User'}",
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 35,
@@ -125,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.to(() => const AllUsers());
               },
               child: Container(
-                margin: const EdgeInsets.only(top: 200),
+                margin: const EdgeInsets.only(top: 120),
                 height: 80,
                 width: 200,
                 decoration: BoxDecoration(
@@ -170,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
             ),
             onPressed: () {
-              Get.to(() => const Settings());
+              Get.toNamed("/settings");
             },
           ),
         ),

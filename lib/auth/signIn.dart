@@ -18,9 +18,6 @@ class _SignInState extends State<SignIn> {
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 70,
-          ),
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topRight,
@@ -37,20 +34,16 @@ class _SignInState extends State<SignIn> {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 200.0),
-                    child: Text(
-                      'Chat App',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.grey[200],
-                        fontWeight: FontWeight.bold,
-                      ),
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: Image.asset(
+                      "getXChatLogo.png",
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: 80,
+                      top: 20,
+                      left: 40,
+                      right: 40,
                     ),
                     child: TextFormField(
                       controller: emailController,
@@ -88,6 +81,8 @@ class _SignInState extends State<SignIn> {
                   Padding(
                     padding: const EdgeInsets.only(
                       top: 40,
+                      left: 40,
+                      right: 40,
                     ),
                     child: TextFormField(
                       controller: passwordController,
@@ -128,7 +123,11 @@ class _SignInState extends State<SignIn> {
                           passwordController.text.trim());
                     },
                     child: Container(
-                      margin: const EdgeInsets.only(top: 30),
+                      margin: const EdgeInsets.only(
+                        top: 30,
+                        left: 40,
+                        right: 40,
+                      ),
                       height: 50,
                       width: 100,
                       decoration: BoxDecoration(
